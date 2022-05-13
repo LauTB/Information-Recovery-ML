@@ -8,3 +8,5 @@ Jessy Gigato Izquierdo C511\
 
 Para el uso de la aplicacion instale las bibliotecas necesarias:
 > pip3 install -r requirements.txt
+
+
