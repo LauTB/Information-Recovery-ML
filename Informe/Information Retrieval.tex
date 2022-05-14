@@ -53,7 +53,6 @@ Parte de este pipeline sería: \\
 
 \subsubsection*{Representación}
 Como estamos utilizando el modelo vectorial entonces los documentos son representados mediante vectores, cuya representación es obtenida mediante la tokenización de la consulta.
-
 \begin{equation}
 	w_{ij} = frac{tf_{ij}}{\max_{k} tf_{kj}}idf_{j}
 \end{equation}
@@ -63,7 +62,24 @@ Donde:\\
 $ w_{ij} $ - Representa el peso asociado al termino $ i $ en el documento $ j $\\
 $tf_{ij}$ - Número de veces que se repite el término $i$ en el documento $j$\\
 $idf_{j}$ - Frecuencia inversa del documento $j$ en la colección de documentos calculada por $\log{\frac{N}{n_j}}$\\
-$n_j$ - cantidad de documentos en donde aparece el término $j$.
+$n_j$ - cantidad de documentos en donde aparece el término $j$.\\
+
+La consulta presenta la misma representación que los documentos solamente que se le aplica una formula diferente:
+\begin{equation}
+	(\alpha idf_i + (1-\alpha)\frac{tf_{ij}}{\max_{k} tf_{kj}}) idf_i
+\end{equation}
+
+Siendo $\alpha$ el factor de suavizado
+
+Finalmente para realizar un ranking de los documentos se calcula la similitud entre los documentos y la consulta y son ordenados de mayor a menor y asi se devolveran.
+\begin{equation}
+	sim(q,d_i) = \cos(q, d_i) = \frac{q \cdot d_i}{||q|| ||d_i||}
+\end{equation}
+
+Ecuación 3. Función de similitud
+
+
+
 
 Las principales bibliotecas de Python utilizadas para el proyecto fueron sklearn (utilizada para preprocesar el corpus de documentos) y nltk (usado en la tokenizacion y limpieza de la consulta)
 

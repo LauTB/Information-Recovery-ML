@@ -8,7 +8,12 @@ class MiApp(QtWidgets.QMainWindow):
 	def __init__(self):
 		super().__init__()
 		self.ui = Ui_MainWindow() 
-		self.ui.setupUi(self)		
+		self.ui.setupUi(self)
+    #     self.ui.btn_generate.clicked.connect(self.get_documents)	
+
+
+    # def get_documents(self):
+    #     pass	
 
 
 # if __name__ == "__main__":
