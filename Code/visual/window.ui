@@ -92,6 +92,9 @@
             <property name="undoRedoEnabled">
              <bool>true</bool>
             </property>
+            <property name="placeholderText">
+             <string>Entre su consulta</string>
+            </property>
            </widget>
           </item>
           <item>
