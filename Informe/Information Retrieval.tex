@@ -9,7 +9,7 @@
 
 
 \begin{document}
-\title{Traducción Automática}
+\title{Proyecto Final de Sistemas de Recuperación de Información. Motor de Búsqueda}
 
 \author{Laura Tamayo \inst{1} \and 
 Yasmin Cisneros\inst{2} \and 
@@ -17,6 +17,58 @@ Jessy Gigato\inst{3}}
 \institute{Universidad de La Habana, La Habana, Cuba}
 \maketitle
 \begin{abstract}
-	En el presente trabajo se habla sobre como implementar un Sistema de Recuperación de la Información utilizando técnicas de Inteligencia Artificial con el uso de la biblioteca PyTerrier.
+	In our days, search engines have become our best allies and companions in daily use, they help us get to the information we want (in almost all cases) and resolve our most diverse concerns. These are nothing more than mechanisms that organize and distribute the information produced on the network to users who express their doubts from queries in these engines.
 \end{abstract}
+
+\section*{Introducción}
+
+En nuestros días los motores de búsqueda se han convertido en nuestros mejores aleados y compañeros de uso cotidiano, estos nos ayudan a llegar a la información que queremos (en casi todos los casos) y resolver nuestras mas diversas inquietudes. Estos no son mas que mecanismos que organizan y distribuyen la información producida en la red a los usuarios que expresan sus dudas a partir de consultas en los estos motores. La recuperación de la información se ha convertido en un área sumamente importante en la Ciencia de la Computación ya que es generada diariamente una amplia cantidad de información nueva la cual presenta relevancia y su alcance debería ser importante sin obviar la información precedera.
+
+El trabajo presenta como objetivo principal la creación de un Motor de Búsqueda el cual resulte intuitivo al usuario.
+
+\section*{Desarrollo}
+En el campo de la recuperación de la información se tienen varios modelos clásicos para la recuperación de la misma. Estos serian:
+\begin{itemize}
+	\item Modelo Booleano
+	\item Modelo Vectorial
+	\item Modelo Probabilístico
+\end{itemize}
+Para la creación de nuestro Motor de Bus queda nos centraremos en la utilización del modelo Vectorial
+
+\subsection*{Arquitectura del Proyecto}
+El Motor de Búsqueda pasara por una serie de procesos para retornarle al usuario una respuesta:
+\begin{itemize}
+	\item Se le entra una consulta
+	\item Realiza el proceso de búsqueda en el corpus de documentos que se tiene
+	\item Retorna una lista de documentos con las coincidencias y/o respuestas mas acertadas 
+\end{itemize}
+
+\subsection*{Implementación}
+Cada uno de los procesos vistos anteriormente constara de una serie de pasos los cuales constituirían el pipeline (flujo) de la aplicación.\\
+
+Parte de este pipeline sería: \\
+- tokenizar la entrada \\
+- limpiar dichos tokens \\
+- eliminar los stopwords
+
+\subsubsection*{Representación}
+Como estamos utilizando el modelo vectoria entonces los documentos son representados mediante vectores, cuya representación es obtenida mediante la tokenización de la consulta.
+
+\begin{equation}
+	w_{ij} = frac{tf_{ij}}{\max_{k} tf_{kj}}idf_{j}
+\end{equation}
+Ecuación 1. Representación vista en clases\\
+
+Donde:\\
+$ w_{ij} $ - Representa el peso asociado al termino $ i $ en el documento $ j $\\
+$tf_{ij}$ - Número de veces que se repite el término $i$ en el documento $j$\\
+$idf_{j}$ - Frecuencia inversa del documento $j$ en la colección de documentos calculada por $\log{\frac{N}{n_j}}$\\
+$n_j$ - cantidad de documentos en donde aparece el término $j$.
+
+\subsection*{Visual}
+La aplicación visual fue creada utilizando PyQt.
+
+\section*{Conclusiones}
+(Trabajando)
+
 \end{document}

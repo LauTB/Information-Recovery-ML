@@ -68,7 +68,13 @@
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0">
+         <property name="lineWidth">
+          <number>1</number>
+         </property>
+         <property name="midLineWidth">
+          <number>1</number>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0">
           <property name="spacing">
            <number>2</number>
           </property>
@@ -82,10 +88,11 @@
            <number>11</number>
           </property>
           <item>
-           <widget class="QTextEdit" name="textEdit"/>
-          </item>
-          <item>
-           <widget class="QPlainTextEdit" name="plainTextEdit"/>
+           <widget class="QTextEdit" name="textEdit">
+            <property name="undoRedoEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="btn_generate">
