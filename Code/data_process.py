@@ -1,7 +1,7 @@
 import ir_datasets
 
-def load_dataset():
-    return ir_datasets.load("vaswani")
+def load_dataset(ds_name: str):
+    return ir_datasets.load(ds_name)
 
 def make_text_list(dataset):
     documents = []

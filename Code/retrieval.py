@@ -1,5 +1,5 @@
-from preprocessing import preprocess, transform
-from vect_model import vectorial_model
+from .preprocessing import preprocess, transform
+from .vect_model import vectorial_model
 
 docs = [
       'In computer science artificial intelligence sometimes called machine intelligence is intelligence demonstrated by machines',
@@ -28,5 +28,5 @@ def retrieval(docs,query):
     return result
 
 
-retrieval(docs,query)
+# retrieval(docs,query)
 
