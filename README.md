@@ -2,9 +2,9 @@
 An information recovery system using Machine Learning
 
 ### Integrantes:
-Laura Tamayo Blanco C511\
 Yasmin Cisneros Cimadevila C511\
-Jessy Gigato Izquierdo C511
+Jessy Gigato Izquierdo C511\
+Laura Tamayo Blanco C511
 
 ---------
 
@@ -17,7 +17,5 @@ Las cuales son:
 Inicializar el proyecto y generar los archivos necesarios
 > python3 initialize.py
 
-Para ejecutar la aplicación:
+Para ejecutar la aplicación (Esta debe de realizarse online ya que hay archivos que deben de descargarse en tiempo de ejecución):
 > python3 main.py
-
-----------
