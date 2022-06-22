@@ -13,6 +13,8 @@ Para el uso de la aplicacion instale las bibliotecas necesarias:
 Las cuales son:
     - sklearn
     - nltk
+    - ir-datasets
+    - PyQt5
 
 Inicializar el proyecto y generar los archivos necesarios
 > python3 initialize.py
