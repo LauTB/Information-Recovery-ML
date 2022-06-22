@@ -1,5 +1,5 @@
 import sys
-from Code.visual.wait_win import Ui_waiting_win
+# from Code.visual.wait_win import Ui_waiting_win
 import ir_datasets as ird
 from .win import *
 from PyQt5 import QtWidgets as qtw, uic
@@ -56,7 +56,11 @@ class MiApp(QtWidgets.QMainWindow):
         return result
 
     def get_documents(self):
+        print( self.ui.comboBoxModel.currentText() , type( self.ui.comboBoxModel.currentText() ))
+        mod_ = self.ui.comboBoxModel.currentText() 
+        db = self.ui.comboBoxDB.currentText()
         query = self.ui.lineEdit.text()
+        
         print("busqueda:", query)
         if not query: 
             msgbox = QMessageBox()
@@ -64,8 +68,8 @@ class MiApp(QtWidgets.QMainWindow):
             msgbox.exec()
             return
         
-        documents = self.load_db_json('vaswani')
-        print(type(documents))
+        documents = self.load_db_json(db)
+        # print(type(documents))
         
         # ventana de espera
         msgbox = QMessageBox()
@@ -73,8 +77,13 @@ class MiApp(QtWidgets.QMainWindow):
         msgbox.exec()
         
         # retrieval
-        ranked_list = retrieval(documents, query)
-        print("ranked_list", type(ranked_list))
+        ranked_list = ['modelo no implementado']
+        
+        if mod_ == 'modelo vectorial':
+            print('busqueda por vectorial')
+            ranked_list = retrieval(documents, query)
+        else:
+            pass
         
         model = QtGui.QStandardItemModel()
         self.ui.listView.setModel(model)
