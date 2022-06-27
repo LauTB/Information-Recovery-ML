@@ -81,9 +81,10 @@ class MiApp(QtWidgets.QMainWindow):
         
         if mod_ == 'modelo vectorial':
             print('busqueda por vectorial')
-            ranked_list = retrieval(documents, query)
+            ranked_list = retrieval(documents, query,db,'v')
         else:
-            pass
+            ranked_list = retrieval(documents, query,db,'nn')
+
         
         model = QtGui.QStandardItemModel()
         self.ui.listView.setModel(model)

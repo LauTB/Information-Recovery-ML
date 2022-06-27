@@ -1,6 +1,9 @@
+from unittest import result
 from .preprocessing import preprocess, transform
 from .vect_model import vectorial_model
-
+from .neural_network_model import neural_network_model
+from sklearn.feature_extraction.text import CountVectorizer
+'''
 docs = [
       'In computer science artificial intelligence sometimes called machine intelligence is intelligence demonstrated by machines',
 
@@ -17,16 +20,33 @@ docs = [
       'Sociology is the study of society, patterns of social relationships, social interaction, and culture that surrounds everyday life',
     
     ]
-query = 'computer science'
+'''
 
-def retrieval(docs,query):
+docs = ['the computer science is la tiza',
+        'Por mis cojones',
+        'computer machine',
+        'Biochemistry is the branch of science']
+
+query = 'computer science'
+query1 = 'computer'
+query2 = 'my mom is computer scientific'
+querys= [query,query1,query2]
+
+def retrieval(docs,query,db,model):
     proc_docs = preprocess(docs)
     proc_query = preprocess([query])
     doc_vector,query_vector = transform(proc_docs,proc_query)
-    indexs = vectorial_model(doc_vector,query_vector)
+    indexs = None
+    if model == 'v':
+        countVect = CountVectorizer()
+        doc_vector = countVect.fit_transform(proc_docs)
+        print(doc_vector)
+        indexs = vectorial_model(doc_vector,query_vector)
+    else:
+        neural_network_model(proc_docs, proc_query,db)
+    print(indexs)
     result = [proc_docs[i] for i in indexs]
     return result
 
-
-# retrieval(docs,query)
+#retrieval(docs,query)
 
