@@ -1,10 +1,7 @@
 import subprocess
-from Code.data_process import load_dataset, make_text_list
+from Code.data_process import load_dataset, make_text_list, save_database
 import json
 
-def save_database(path, files, db):
-    with open(f'{path}/{db}_db.json', 'w') as f:
-        json.dump(files, f, indent=4)
 
 def run():
     #  pyuic5 -x visual\window.ui -o visual\win.py

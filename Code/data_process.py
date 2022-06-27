@@ -1,7 +1,24 @@
 import ir_datasets
+import json
+
+
+def save_database(path, files, db):
+    with open(f'{path}/{db}_db.json', 'w') as f:
+        json.dump(files, f, indent=4)
 
 def load_dataset(ds_name: str):
-    return ir_datasets.load(ds_name)
+    ds = ir_datasets.load(ds_name)
+    
+    # guardando las queries
+    queries = [q for q in ds.queries_iter()]
+    q = [q_.text for q_ in queries[0:5]]
+    print("".join(q))
+    with open(f"../{ds_name}_queries.txt", "w") as f:
+        print("etre")
+        f.write("\n".join(q))
+        f.close()
+
+    return ds
 
 def make_text_list(dataset):
     documents = []
