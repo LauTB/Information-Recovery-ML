@@ -48,22 +48,5 @@ def retrieval(docs,query,db,model):
     result = [proc_docs[i] for i in indexs]
     return result
 
-def retrieval_(docs,query):
-    q_similarity = []
-    q_0_1 = [[]]
-    proc_docs = preprocess(docs)
-    doc_vector =None
-    for i,q in enumerate(querys):
-        proc_query = preprocess([q])
-        doc_vector,query_vector = transform(proc_docs,proc_query)
-        indexs,similarity = vectorial_model(doc_vector,query_vector)
-        
-        print("query_vctor con 0 y 1",query_vector)
-        q_similarity.append(query_vector, similarity)
-    neural_network_model(doc_vector, None, q_similarity)
-
-        
-
-
 #retrieval(docs,query)
 
