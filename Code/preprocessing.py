@@ -41,8 +41,6 @@ def transform(proc_docs,query):
 
     doc_vector = vectorizerX.transform(proc_docs)
     query_vector = vectorizerX.transform(query)
-    print(doc_vector)
-    print(query_vector)
 
     return doc_vector,query_vector
 

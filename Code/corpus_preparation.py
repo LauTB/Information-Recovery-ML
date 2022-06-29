@@ -1,11 +1,14 @@
 import ir_datasets
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+from .preprocessing import *
 
-def get_words(dataset):
+def get_words(proc_docs):
 #construir el diccionario de términos-indice
   words = {}
   index = 0
-  for doc in dataset.docs_iter():
-      text = doc.text.split()
+  for doc in proc_docs:
+      text = doc.split()
       for t in text:
         t = t.lower()
         try:
@@ -18,17 +21,20 @@ def get_words(dataset):
 def create_queries_vec(dataset, words):
   #crear vector de queries
   queries = []
-  for query in dataset.queries_iter():
+  q = [i.text for i in dataset.queries_iter()]
+  proc_queries = preprocess(q)
+  print("proc q",proc_queries[0])
+  for query in proc_queries:
+    print(len(words))
     query_format = [0 for _ in range(len(words))]
-    title = query.text.split()[:-1]
+    title = query.split()[:-1]
     for t in title:
       t = t.lower()
       try:
         index= words[t]
         query_format[index]=1
       except Exception as e:
-        continue
-        #print("Warning: the term " + t + " does not belong to the vocabulary and will be ignored")
+        print("Warning: the term " + t + " does not belong to the vocabulary and will be ignored")
     queries.append(query_format)
   return queries
 
@@ -67,27 +73,27 @@ def load_ranking(dataset, query):
       doc[d] = 0.4 #r==1 and not really relevant
   return doc
 
+def term_matrix(proc_docs):
+    vec = CountVectorizer()
+    X = vec.fit_transform(proc_docs)
+    #print(X.toarray())
+    #df = pd.DataFrame(X.toarray(), columns=vec.get_feature_names_out())
+    return X.toarray()
+
 
 def corpus_preparation(ds_name):
   dataset = ir_datasets.load(ds_name)
-  words = get_words(dataset)
+  d = [i.text for i in dataset.docs_iter()]
+  proc_docs = preprocess(d)
+  words = get_words(proc_docs)
+  #q = lista de todas las queries representadas como vector de len=|voc|, con 1 y 0
   q = create_queries_vec(dataset, words)
   ranked_results = []
   for index, query in enumerate(q):
       ranked = get_all_relevance_from_query(dataset, index+1)
       vector = load_ranking(dataset, ranked)
       ranked_results.append(vector)
-  return q,ranked_results
+  term_doc = term_matrix(proc_docs)
+  return q,ranked_results,term_doc
 
-'''
-  if __name__ == "__main__":
-        dataset = ir_datasets.load("cranfield")
-    words = get_words(dataset)
-    q = create_queries_vec(dataset, words)
-    ranked_results = []
-    for index, query in enumerate(q):
-        ranked = get_all_relevance_from_query(dataset, index+1)
-        vector = load_ranking(dataset, ranked)
-        ranked_results.append(vector)
-    print('en q están las queries como binarios y en ranked result para cada query los documentod relevantes')
-'''
+

@@ -40,7 +40,7 @@ def retrieval(docs,query,db,model):
     if model == 'v':
         countVect = CountVectorizer()
         doc_vector = countVect.fit_transform(proc_docs)
-        print(doc_vector)
+        print(doc_vector.toarray())
         indexs = vectorial_model(doc_vector,query_vector)
     else:
         neural_network_model(proc_docs, proc_query,db)
