@@ -2,6 +2,7 @@ from unittest import result
 from .preprocessing import preprocess, transform
 from .vect_model import vectorial_model
 from .neural_network_model import neural_network_model
+from .svd_retrieval import svd_model
 from sklearn.feature_extraction.text import CountVectorizer
 '''
 docs = [
@@ -38,13 +39,15 @@ def retrieval(docs,query,db,model):
     doc_vector,query_vector = transform(proc_docs,proc_query)
     indexs = None
     if model == 'v':
-        countVect = CountVectorizer()
-        doc_vector = countVect.fit_transform(proc_docs)
-        print(doc_vector.toarray())
+        # countVect = CountVectorizer()
+        # doc_vector = countVect.fit_transform(proc_docs)
+        # print(doc_vector.toarray())
         indexs = vectorial_model(doc_vector,query_vector)
+    elif model == 'lsi':
+        indexs = svd_model(doc_vector,query_vector)
     else:
         neural_network_model(proc_docs, proc_query,db)
-    print(indexs)
+    # print(indexs)
     result = [proc_docs[i] for i in indexs]
     return result
 

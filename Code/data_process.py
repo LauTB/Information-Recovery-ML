@@ -12,9 +12,7 @@ def load_dataset(ds_name: str):
     # guardando las queries
     queries = [q for q in ds.queries_iter()]
     q = [q_.text for q_ in queries[0:5]]
-    print("".join(q))
     with open(f"../{ds_name}_queries.txt", "w") as f:
-        print("etre")
         f.write("\n".join(q))
         f.close()
 

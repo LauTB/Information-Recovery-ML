@@ -6,6 +6,7 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 #import pandas as pd
+from nltk.corpus import wordnet
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -18,6 +19,7 @@ def preprocess(docs):
         tokens = nltk.word_tokenize(doc)
         #removing stopwords
         new_doc = remove_stopwords(tokens)
+        new_doc = query_expansion(new_doc)
         #stemming
         ps = PorterStemmer()
         stemmed = []
@@ -44,3 +46,21 @@ def transform(proc_docs,query):
 
     return doc_vector,query_vector
 
+
+def query_expansion(query):
+    synonyms = []
+    holonyms = []
+    meronyms = []
+
+    for word in query:
+        for syn in wordnet.synsets(word):
+            for i in syn.lemmas():
+                synonyms.append(i.name())
+        for items in wordnet.synsets(word):
+            for lm in items.part_holonyms():
+                holonyms += lm.lemma_names()
+            for lm in items.part_meronyms():
+                meronyms += lm.lemma_names()
+                
+    result = synonyms + holonyms + meronyms
+    return list(set(result))

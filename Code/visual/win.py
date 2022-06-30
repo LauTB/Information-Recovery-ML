@@ -78,6 +78,7 @@ class Ui_MainWindow(object):
         self.comboBoxModel.setObjectName("comboBoxModel")
         self.comboBoxModel.addItem("")
         self.comboBoxModel.addItem("")
+        self.comboBoxModel.addItem("")
         self.verticalLayout_4.addWidget(self.comboBoxModel)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_4.addItem(spacerItem)
@@ -110,7 +111,8 @@ class Ui_MainWindow(object):
         self.comboBoxDB.setItemText(1, _translate("MainWindow", "cranfield"))
         self.label_2.setText(_translate("MainWindow", "Base de Datos:"))
         self.comboBoxModel.setItemText(0, _translate("MainWindow", "modelo vectorial"))
-        self.comboBoxModel.setItemText(1, _translate("MainWindow", "red neuronal"))
+        self.comboBoxModel.setItemText(1, _translate("MainWindow", "modelo LSI"))
+        self.comboBoxModel.setItemText(2, _translate("MainWindow", "red neuronal"))
 
 
 if __name__ == "__main__":

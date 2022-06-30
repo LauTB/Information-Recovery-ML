@@ -1,11 +1,14 @@
 import subprocess
 from Code.data_process import load_dataset, make_text_list, save_database
 import json
+import nltk
 
 
 def run():
     #  pyuic5 -x visual\window.ui -o visual\win.py
     print('Generando archivos necesarios.\n')
+    nltk.download('wordnet')
+    nltk.download('omw-1.4')
     
     print('Cargando Base de Datos Vaswani')
     datasets_vas = make_text_list(load_dataset('vaswani'))

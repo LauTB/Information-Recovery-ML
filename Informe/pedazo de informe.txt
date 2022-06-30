@@ -1,0 +1,9 @@
+\section*{Learn To Rank(LTR)}
+La tarea conocida como Learn to Rank consiste en dado un par consulta-documento obtener qué tan relevante es dicho documento para la consulta. Para ello representan elemento como un vector de características $x \in \Re^{n}$. El modelo es entrenado entonces para mapear ese vector de características a un valor real tal que para una consulta determinada los documentos más relevantes obtengan una puntuación más alta. \\
+Como primer experimento se utilizó la biblioteca Pyterrier para el manejo del corpus utilizado(en este caso fue el vaswani) y el modelo utilizado fue el Random Forest que brinda la biblioteca sklearn.\\
+El modelo usado para comparar los resultados se conoce como BM25 el cual funciona de manera similar al modelo vectorial descrito anteriormente pero la función de similaridad es la siguiente:
+\begin{equation}
+socre(Q,D)= \sum_{i=1}^{n}idf(q_{i}) * \frac{tf(q_{i},D)*(k_{1}+1)}{tf(q_{i},D)+k_{1}* (1-b+b*\frac{\vert D\vert}{avg(dl)})}
+\end{equation}
+Donde $k_{1}\in [1.2,2.0], b = 0.75$ y avg(dl) representa la longitud promedio de los documentos en la colección.\\
+Las medidas que se usaron fueron el recobrado y la medida mAP. En la figura 1 se muestran los resultados obtenidos y se puede apreciar que el recobrado para 1000 documentos es mejor en el modelo con LTR mientras que el mAP es mejor en el modelo BM25.

@@ -10,6 +10,7 @@ import pandas as pd
 from ..data_process import load_dataset, make_text_list
 from ..retrieval import retrieval 
 import json
+import threading
 
 class MiApp(QtWidgets.QMainWindow):
     def __init__(self):
@@ -56,7 +57,7 @@ class MiApp(QtWidgets.QMainWindow):
         return result
 
     def get_documents(self):
-        print( self.ui.comboBoxModel.currentText() , type( self.ui.comboBoxModel.currentText() ))
+        # print( self.ui.comboBoxModel.currentText() , type( self.ui.comboBoxModel.currentText() ))
         mod_ = self.ui.comboBoxModel.currentText() 
         db = self.ui.comboBoxDB.currentText()
         query = self.ui.lineEdit.text()
@@ -72,9 +73,7 @@ class MiApp(QtWidgets.QMainWindow):
         # print(type(documents))
         
         # ventana de espera
-        msgbox = QMessageBox()
-        msgbox.setText('Esperando a que termine la busqueda')
-        msgbox.exec()
+        # threading.Thread(target=self.show_messagebox, args=('Esperando a que termine la busqueda',))
         
         # retrieval
         ranked_list = ['modelo no implementado']
@@ -82,9 +81,16 @@ class MiApp(QtWidgets.QMainWindow):
         if mod_ == 'modelo vectorial':
             print('busqueda por vectorial')
             ranked_list = retrieval(documents, query,db,'v')
+        elif mod_ == 'modelo LSI':
+            print("entre a LSI")
+            ranked_list = retrieval(documents, query, db, 'lsi')
         else:
             ranked_list = retrieval(documents, query,db,'nn')
-
+        
+        # threading.Thread(target=self.show_messagebox, args=('Busqueda terminada',))
+        msgbox = QMessageBox()
+        msgbox.setText("La busqueda finalizo correctamente!")
+        msgbox.exec()
         
         model = QtGui.QStandardItemModel()
         self.ui.listView.setModel(model)
@@ -95,7 +101,10 @@ class MiApp(QtWidgets.QMainWindow):
             model.appendRow(item)
         # una vez obtenidos todos los documentos 
         # self.ui.listView.addItems(ranked_list)
-
+    def show_messagebox(self, text):
+        msgbox = QMessageBox()
+        msgbox.setText(text)
+        msgbox.exec()
 
 
 # if __name__ == "__main__":
