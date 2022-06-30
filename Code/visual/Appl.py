@@ -19,6 +19,7 @@ class MiApp(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         # self.datasets = self.load_dataset()
         self.ui.btn_generate.clicked.connect(self.get_documents)
+        self.ui.btn_generate.clicked.connect(self.calculate_metrics)
 
     def load_dataset(self):
         datasets = self.get_list_of_datasets()
@@ -102,10 +103,20 @@ class MiApp(QtWidgets.QMainWindow):
             model.appendRow(item)
         # una vez obtenidos todos los documentos 
         # self.ui.listView.addItems(ranked_list)
+        
+    
     def show_messagebox(self, text):
         msgbox = QMessageBox()
         msgbox.setText(text)
         msgbox.exec()
+        
+    # metodo para calcular las metricas
+    def calculate_metrics(self):
+        
+        #metodo para mostrar ventanas
+        self.show_messagebox("el mensaje a mostrar escribelo aca")
+        
+        pass
 
 
 # if __name__ == "__main__":
