@@ -19,7 +19,7 @@ class MiApp(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         # self.datasets = self.load_dataset()
         self.ui.btn_generate.clicked.connect(self.get_documents)
-        self.ui.btn_generate.clicked.connect(self.calculate_metrics)
+        self.ui.pushButtonMedidas.clicked.connect(self.calculate_metrics)
 
     def load_dataset(self):
         datasets = self.get_list_of_datasets()
