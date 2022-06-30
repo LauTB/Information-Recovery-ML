@@ -61,6 +61,7 @@ class MiApp(QtWidgets.QMainWindow):
         mod_ = self.ui.comboBoxModel.currentText() 
         db = self.ui.comboBoxDB.currentText()
         query = self.ui.lineEdit.text()
+        query_exp = self.ui.query_exp.currentText() == 'si'
         
         print("busqueda:", query)
         if not query: 
@@ -80,12 +81,12 @@ class MiApp(QtWidgets.QMainWindow):
         
         if mod_ == 'modelo vectorial':
             print('busqueda por vectorial')
-            ranked_list = retrieval(documents, query,db,'v')
+            ranked_list = retrieval(documents, query,db,'v', query_exp)
         elif mod_ == 'modelo LSI':
             print("entre a LSI")
-            ranked_list = retrieval(documents, query, db, 'lsi')
+            ranked_list = retrieval(documents, query, db, 'lsi', query_exp)
         else:
-            ranked_list = retrieval(documents, query,db,'nn')
+            ranked_list = retrieval(documents, query,db,'nn', query_exp)
         
         # threading.Thread(target=self.show_messagebox, args=('Busqueda terminada',))
         msgbox = QMessageBox()

@@ -11,7 +11,7 @@ from nltk.corpus import wordnet
 nltk.download('punkt')
 nltk.download('stopwords')
 
-def preprocess(docs):
+def preprocess(docs, qe=False):
     
     proc_docs =  []
     for doc in docs:
@@ -19,7 +19,8 @@ def preprocess(docs):
         tokens = nltk.word_tokenize(doc)
         #removing stopwords
         new_doc = remove_stopwords(tokens)
-        new_doc = query_expansion(new_doc)
+        if qe:
+            new_doc = query_expansion(new_doc)
         #stemming
         ps = PorterStemmer()
         stemmed = []

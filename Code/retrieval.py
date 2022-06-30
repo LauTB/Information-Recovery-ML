@@ -33,9 +33,9 @@ query1 = 'computer'
 query2 = 'my mom is computer scientific'
 querys= [query,query1,query2]
 
-def retrieval(docs,query,db,model):
+def retrieval(docs, query, db, model, query_exp):
     proc_docs = preprocess(docs)
-    proc_query = preprocess([query])
+    proc_query = preprocess([query], query_exp)
     doc_vector,query_vector = transform(proc_docs,proc_query)
     indexs = None
     if model == 'v':

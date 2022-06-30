@@ -176,6 +176,34 @@
              </widget>
             </item>
             <item>
+             <widget class="Line" name="line_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Expanción de Consulta</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="query_exp">
+              <item>
+               <property name="text">
+                <string>no</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>si</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
              <spacer name="verticalSpacer">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
